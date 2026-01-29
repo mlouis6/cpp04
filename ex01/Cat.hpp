@@ -26,7 +26,7 @@ class Cat : public Animal
 
 		void makeSound() const;
 
-	private:
+	protected:
 		Brain* brain;
 };
 

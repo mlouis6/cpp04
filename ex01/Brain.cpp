@@ -20,8 +20,8 @@ Brain::Brain()
 
 Brain::Brain(const Brain& cpy)
 {
-	for (std::size_t i = 0 ; i < cpy.ideas->size() ; ++i)
-		this->ideas[i].append(cpy.ideas[i]);
+	for (std::size_t i = 0 ; i < 100 ; ++i)
+		this->ideas[i] = cpy.ideas[i];
 	std::cout << "Brain copied" << std::endl;
 }
 
@@ -29,8 +29,8 @@ Brain& Brain::operator=(const Brain& cpy)
 {
 	if (this != &cpy)
 	{
-		for (std::size_t i = 0 ; i < cpy.ideas->size() ; ++i)
-			this->ideas[i].append(cpy.ideas[i]);
+		for (std::size_t i = 0 ; i < 100 ; ++i)
+			this->ideas[i] = cpy.ideas[i];
 	}
 	std::cout << "Brain copied (via assignment operator)" << std::endl;
 	return (*this);

@@ -35,8 +35,16 @@ int	main(void)
 	c->makeSound();
 	
 	std::cout << "\n*** CPY CAT ***" << std::endl;
-	Cat*	cp = c;
-	
+	Cat*	cp = new Cat(*c);
 	delete cp;
+
+	Cat* cc = new Cat();
+	*cc = *c;
+	delete cc;
 	delete c;
+
+	Cat cn;
+	Cat cm(cn);
+	Cat co;
+	co = cn;
 }

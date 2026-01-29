@@ -31,6 +31,7 @@ Cat& Cat::operator=(const Cat& cpy)
 	if (this != &cpy)
 	{
 		Animal::operator=(cpy);
+		delete this->brain;
 		this->brain = new Brain(*cpy.brain); 
 	}
 	std::cout << "Cat copy operator" << std::endl;
