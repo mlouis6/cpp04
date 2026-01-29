@@ -6,15 +6,13 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:10:17 by mlouis            #+#    #+#             */
-/*   Updated: 2026/01/29 13:01:51 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/01/29 13:36:04 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
-#include "WrongAnimal.hpp"
-#include "WrongCat.hpp"
 #include <iostream>
 
 int	main(void)
@@ -32,26 +30,13 @@ int	main(void)
 	delete d;
 
 	std::cout << "\n*** CAT ***" << std::endl;
-	const Animal* c = new Cat();
+	Cat* c = new Cat();
 	std::cout << c->getType() << std::endl;
 	c->makeSound();
+	
+	std::cout << "\n*** CPY CAT ***" << std::endl;
+	Cat*	cp = c;
+	
+	delete cp;
 	delete c;
-
-	std::cout << "\n*** WRONG ANIMAL ***" << std::endl;
-	const WrongAnimal* w_meta = new WrongAnimal();
-	std::cout << w_meta->getType() << " " << std::endl;
-	w_meta->makeSound();
-	delete w_meta;
-
-	std::cout << "\n*** WRONG CAT (as Animal) ***" << std::endl;
-	const WrongAnimal* w_c = new WrongCat();
-	std::cout << w_c->getType() << " " << std::endl;
-	w_c->makeSound();
-	delete w_c;
-
-	std::cout << "\n*** WRONG CAT (as WrongCat) ***" << std::endl;
-	const WrongCat* ww_c = new WrongCat();
-	std::cout << ww_c->getType() << " " << std::endl;
-	ww_c->makeSound();
-	delete ww_c;
 }
