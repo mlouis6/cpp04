@@ -6,25 +6,25 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:10:17 by mlouis            #+#    #+#             */
-/*   Updated: 2026/01/30 15:45:49 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/01/30 15:50:26 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
 #include <iostream>
 
 int	main(void)
 {
-	std::cout << "*** ANIMAL ***" << std::endl;
-	const Animal* meta = new Animal();
-	std::cout << meta->getType() << std::endl;
-	meta->makeSound();
-	delete meta;
+	// std::cout << "*** AAnimal ***" << std::endl;
+	// const AAnimal* meta = new AAnimal();
+	// std::cout << meta->getType() << std::endl;
+	// meta->makeSound();
+	// delete meta;
 
 	std::cout << "\n*** DOG ***" << std::endl;
-	const Animal* d = new Dog();
+	const AAnimal* d = new Dog();
 	std::cout << d->getType() << std::endl;
 	d->makeSound();
 	delete d;
@@ -88,24 +88,24 @@ int	main(void)
 	std::cout << "endNon alloc\n" << std::endl;
 
 	int		nb_obj = 6;
-	Animal*	animals[nb_obj];
+	AAnimal*	AAnimals[nb_obj];
 	int 	i = 0;
 
 	std::cout << "\nDOGS" << std::endl;
 	for (; i < nb_obj / 2 ; ++i)
 	{
-		animals[i] = new Dog();
+		AAnimals[i] = new Dog();
 	}
 	std::cout << "\nCATS" << std::endl;
 	for (; i < nb_obj ; ++i)
 	{
-		animals[i] = new Cat();
+		AAnimals[i] = new Cat();
 	}
 
-	// animals[0]->getBrain().addIdea("who's a good boy?");
-	// std::cout << animals[0]->getBrain();
+	AAnimals[0]->getBrain().addIdea("who's a good boy?");
+	std::cout << AAnimals[0]->getBrain();
 
 	std::cout << "\nBYE" << std::endl;
 	for (int j = 0; j < nb_obj ; ++j)
-		delete animals[j];
+		delete AAnimals[j];
 }

@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/28 11:04:28 by mlouis            #+#    #+#             */
-/*   Updated: 2026/01/30 11:47:18 by mlouis           ###   ########.fr       */
+/*   Created: 2026/01/28 10:59:11 by mlouis            #+#    #+#             */
+/*   Updated: 2026/01/30 15:50:08 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-# define CAT_HPP
+#ifndef DOG_HPP
+# define DOG_HPP
 
-# include "Animal.hpp"
+# include "AAnimal.hpp"
 # include "Brain.hpp"
 
-class Cat : public Animal
+class Dog : public AAnimal
 {
 	public:
-		Cat();
-		Cat(const Cat& cpy);
-		Cat& operator=(const Cat& cpy);
-		~Cat();
+		Dog();
+		Dog(const Dog& cpy);
+		Dog& operator=(const Dog& cpy);
+		~Dog();
 
 		void makeSound() const;
 		Brain& getBrain() const;
