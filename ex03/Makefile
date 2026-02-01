@@ -14,7 +14,7 @@
 
 NAME := materia.out
 
-SRCS := AMateria.cpp main.cpp
+SRCS := Character.cpp MateriaSource.cpp AMateria.cpp Ice.cpp Cure.cpp main.cpp
 INCS := .
 OBJS := $(SRCS:%.cpp=%.o)
 DEPS := $(OBJS:.o=.d)

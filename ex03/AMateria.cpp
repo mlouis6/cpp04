@@ -10,3 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "AMateria.hpp"
+
+AMateria::AMateria(std::string& const type) : m_type(type)
+{
+
+}
+
+AMateria::AMateria(AMateria& const cpy)
+{
+
+}
+
+AMateria&	AMateria::operator=(AMateria& const cpy)
+{
+
+}
+
+AMateria::~AMateria()
+{
+
+}
+
+std::string& const AMateria::getType() const
+{
+    return (m_type);
+}
