@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Cure.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/02 10:54:08 by mlouis            #+#    #+#             */
+/*   Updated: 2026/02/02 10:54:09 by mlouis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CURE_HPP
 # define CURE_HPP
 
@@ -5,13 +17,13 @@
 
 class Cure : public AMateria
 {
-    public:
-        Cure();
-        Cure(Cure const & cpy);
-        Cure& operator=(Cure const & cpy);
-        ~Cure();
+	public:
+		Cure();
+		Cure(const Cure& cpy);
+		Cure& operator=(const Cure& cpy);
+		~Cure();
 
-        AMateria* clone() const;
+		AMateria* clone() const;
 		void use(ICharacter& target);
 };
 

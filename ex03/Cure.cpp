@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Cure.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/02 10:54:10 by mlouis            #+#    #+#             */
+/*   Updated: 2026/02/02 10:54:12 by mlouis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Cure.hpp"
 #include "AMateria.hpp"
 #include "ICharacter.hpp"
@@ -5,18 +17,18 @@
 
 Cure::Cure() : AMateria()
 {
-    m_type = "cure";
+	m_type = "cure";
 }
 
-Cure::Cure(Cure const & cpy)
+Cure::Cure(const Cure& cpy)
 {
-    static_cast<void>(cpy);
+	static_cast<void>(cpy);
 }
 
-Cure& Cure::operator=(Cure const & cpy)
+Cure&	Cure::operator=(const Cure& cpy)
 {
-    static_cast<void>(cpy);
-    return (*this);
+	static_cast<void>(cpy);
+	return (*this);
 }
 
 Cure::~Cure()
@@ -24,12 +36,12 @@ Cure::~Cure()
 
 }
 
-AMateria* Cure::clone() const
+AMateria*	Cure::clone() const
 {
     return (new Cure(*this));
 }
 
-void Cure::use(ICharacter& target)
+void	Cure::use(ICharacter& target)
 {
-    std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
+	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 10:11:11 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/02 10:20:31 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/02 11:36:58 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,18 @@
 
 MateriaSource::MateriaSource()
 {
-	
+	for (int i = 0 ; i < 4 ; ++i)
+	{
+	    m_materias[i] = 0;
+	}
 }
 
-MateriaSource::MateriaSource(MateriaSource const & cpy)
+MateriaSource::MateriaSource(const MateriaSource& cpy)
 {
 	static_cast<void>(cpy);
 }
 
-MateriaSource& MateriaSource::operator=(MateriaSource const & cpy)
+MateriaSource&	MateriaSource::operator=(const MateriaSource& cpy)
 {
 	static_cast<void>(cpy);
 	return (*this);
@@ -32,19 +35,33 @@ MateriaSource& MateriaSource::operator=(MateriaSource const & cpy)
 
 MateriaSource::~MateriaSource()
 {
-
+	for (int i = 0 ; i < 4 ; ++i)
+	{
+	    delete m_materias[i];
+	}
 }
 
 void    MateriaSource::learnMateria(AMateria* materia)
 {
-	static_cast<void>(materia);
+	int i = 0;
+	for ( ; i < 4 ; ++i)
+	{
+		if (m_materias[i] == 0)
+			break ;
+	}
+	if (i < 4)
+		m_materias[i] = materia;
 }
 
-AMateria*   MateriaSource::createMateria(std::string const & type)
+AMateria*   MateriaSource::createMateria(const std::string& type)
 {
-	if (type == "ice")
-		return (new Ice());
-	if (type == "cure")
-		return (new Cure());
+	int i = 0;
+	for ( ; i < 4 ; ++i)
+	{
+		if (m_materias[i]->getType() == type)
+			break ;
+	}
+	if (i < 4)
+		return (m_materias[i]->clone());
 	return (0);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Character.hpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/02 10:54:13 by mlouis            #+#    #+#             */
+/*   Updated: 2026/02/02 14:22:26 by mlouis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CHARACTER_HPP
 # define CHARACTER_HPP
 
@@ -7,19 +19,21 @@
 
 class Character : public ICharacter
 {
-    public:
-        Character(std::string name);
-        Character(Character const & cpy);
-        ~Character();
-        
-        std::string const & getName() const;
-        void equip(AMateria* m);
-        void unequip(int idx);
-        void use(int idx, ICharacter& target);
-    private:
-        std::string m_name;
-        AMateria*   m_inventory[4];
-        Character& operator=(Character const & cpy);
+	public:
+		Character(std::string name);
+		Character(const Character& cpy);
+		~Character();
+
+		const std::string&	getName() const;
+		void	equip(AMateria* m);
+		void	unequip(int idx);
+		void	use(int idx, ICharacter& target);
+	private:
+		std::string	m_name;
+		AMateria*  	m_equipment[4];
+		AMateria*	m_inventory[100];
+		Character&	operator=(const Character& cpy);
+		void		wipeInventory();
 };
 
 #endif

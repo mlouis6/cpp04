@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Character.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/02 10:54:16 by mlouis            #+#    #+#             */
+/*   Updated: 2026/02/02 14:24:13 by mlouis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Character.hpp"
 #include "AMateria.hpp"
 #include <string>
@@ -6,59 +18,93 @@
 
 Character::Character(std::string name) : m_name(name)
 {
-    for (int i = 0 ; i < 4 ; ++i)
-    {
-        m_inventory[i] = 0;
-    }
+	for (int i = 0 ; i < 4 ; ++i)
+	{
+	    m_equipment[i] = 0;
+	}
+	for (int i = 0 ; i < 100 ; ++i)
+	{
+	    m_inventory[i] = 0;
+	}
 }
 
-Character::Character(Character const & cpy)
+Character::Character(const Character& cpy)
 {
-    for (int i = 0 ; i < 4 ; ++i)
-        m_inventory[i] = cpy.m_inventory[i];
-    // this->m_inventory = new AMateria(*cpy.m_inventory);
+	for (int i = 0 ; i < 4 ; ++i)
+		m_equipment[i] = cpy.m_equipment[i];
+	// this->m_equipment = new AMateria(*cpy.m_equipment);
 }
 
-Character& Character::operator=(Character const & cpy)
+Character&	Character::operator=(const Character& cpy)
 {
-    static_cast<void>(cpy);
-    // if (this != &cpy)
-    // {
-    //     this->m_inventory = new AMateria(*cpy.m_inventory);
-    // }
-    return (*this);
+	static_cast<void>(cpy);
+	// if (this != &cpy)
+	// {
+	//     this->m_equipment = new AMateria(*cpy.m_equipment);
+	// }
+	return (*this);
 }
 
 Character::~Character()
 {
-
+	for (int i = 0 ; i < 4 ; ++i)
+		delete m_equipment[i];
+	for (int i = 0 ; i < 100 ; ++i)
+		delete m_inventory[i];
 }
 
-std::string const & Character::getName() const
+const std::string&	Character::getName() const
 {
-    return (m_name);
+	return (m_name);
 }
 
-void Character::equip(AMateria* m)
+void	Character::equip(AMateria* m)
 {
-    int i = 0;
-    for ( ; i < 4 ; ++i)
-    {
-        if (m_inventory[i] == 0)
-            break ;
-    }
-    if (i < 4)
-        m_inventory[i] = m;
-
+	int i = 0;
+	for ( ; i < 4 ; ++i)
+	{
+		if (m_equipment[i] == 0)
+			break ;
+	}
+	if (i < 4)
+		m_equipment[i] = m;
 }
 
-void Character::unequip(int idx)
+void	Character::wipeInventory()
 {
-    m_inventory[idx] = 0;
+	for (int i = 0 ; i < 100 ; ++i)
+	{
+		delete m_inventory[i];
+		m_inventory[i] = 0;
+	}
+	
 }
 
-void Character::use(int idx, ICharacter& target)
+void	Character::unequip(int idx)
 {
-    if (m_inventory[idx] != 0)
-        m_inventory[idx]->use(target);
+	if (m_equipment[idx] == 0)
+		return ;
+
+	int i = 0;
+	for ( ; i < 100 ; ++i)
+	{
+		if (m_inventory[i] == 0)
+			break ;
+	}
+	if (i < 100)
+	{
+		m_inventory[i] = m_equipment[idx];
+	}
+	else
+	{
+		wipeInventory();
+		m_inventory[0] = m_equipment[idx];
+	}
+	m_equipment[idx] = 0;
+}
+
+void	Character::use(int idx, ICharacter& target)
+{
+	if (m_equipment[idx] != 0)
+		m_equipment[idx]->use(target);
 }
