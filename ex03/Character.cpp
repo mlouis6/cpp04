@@ -1,21 +1,31 @@
 #include "Character.hpp"
+#include "AMateria.hpp"
+#include <string>
 
-Character::Character()
+#include <iostream>
+
+Character::Character(std::string name) : m_name(name)
 {
-
-}
-
-Character::Character(Character& const cpy)
-{
-    this->m_inventory = new AMateria(*cpy.m_inventory);
-}
-
-Character& Character::operator=(Character& const cpy)
-{
-    if (this != &cpy)
+    for (int i = 0 ; i < 4 ; ++i)
     {
-        this->m_inventory = new AMateria(*cpy.m_inventory);
+        m_inventory[i] = 0;
     }
+}
+
+Character::Character(Character const & cpy)
+{
+    for (int i = 0 ; i < 4 ; ++i)
+        m_inventory[i] = cpy.m_inventory[i];
+    // this->m_inventory = new AMateria(*cpy.m_inventory);
+}
+
+Character& Character::operator=(Character const & cpy)
+{
+    static_cast<void>(cpy);
+    // if (this != &cpy)
+    // {
+    //     this->m_inventory = new AMateria(*cpy.m_inventory);
+    // }
     return (*this);
 }
 
@@ -24,7 +34,7 @@ Character::~Character()
 
 }
 
-std::string& const Character::getName() const
+std::string const & Character::getName() const
 {
     return (m_name);
 }
@@ -39,8 +49,7 @@ void Character::equip(AMateria* m)
     }
     if (i < 4)
         m_inventory[i] = m;
-    else
-        ; // TODO: add to graveyard
+
 }
 
 void Character::unequip(int idx)
@@ -50,5 +59,6 @@ void Character::unequip(int idx)
 
 void Character::use(int idx, ICharacter& target)
 {
-    m_inventory[idx].use(target);
+    if (m_inventory[idx] != 0)
+        m_inventory[idx]->use(target);
 }

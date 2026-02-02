@@ -7,8 +7,8 @@ class Ice : public AMateria
 {
     public:
         Ice();
-        Ice(Ice& const cpy);
-        Ice& operator=(Ice& const cpy);
+        Ice(Ice const & cpy);
+        Ice& operator=(Ice const & cpy);
         ~Ice();
 
         AMateria* clone() const;

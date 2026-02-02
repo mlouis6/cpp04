@@ -7,8 +7,8 @@ class Cure : public AMateria
 {
     public:
         Cure();
-        Cure(Cure& const cpy);
-        Cure& operator=(Cure& const cpy);
+        Cure(Cure const & cpy);
+        Cure& operator=(Cure const & cpy);
         ~Cure();
 
         AMateria* clone() const;
