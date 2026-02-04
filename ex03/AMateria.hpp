@@ -18,19 +18,22 @@
 class ICharacter;
 class AMateria
 {
-	protected:
-		std::string	m_type;
-
 	public:
 		AMateria();
 		AMateria(const std::string& type);
 		AMateria(const AMateria & cpy);
-		AMateria&	operator=(const AMateria& cpy);
 		virtual ~AMateria() {};
 
 		const std::string&	getType() const;
 		virtual AMateria*	clone() const = 0;
 		virtual void		use(ICharacter& target) = 0;
+
+	protected:
+		std::string	m_type;
+
+	private:
+		AMateria&	operator=(const AMateria& cpy);
+
 };
 
 #endif

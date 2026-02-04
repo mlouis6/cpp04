@@ -15,14 +15,14 @@
 #include "ICharacter.hpp"
 #include <iostream>
 
-Ice::Ice() : AMateria()
+Ice::Ice() : AMateria("ice")
 {
-	m_type = "ice";
+
 }
 
-Ice::Ice(const Ice& cpy)
+Ice::Ice(const Ice& cpy) : AMateria(cpy)
 {
-	static_cast<void>(cpy);
+
 }
 
 Ice&	Ice::operator=(const Ice& cpy)
@@ -36,7 +36,7 @@ Ice::~Ice()
 
 }
 
-AMateria*	Ice::clone() const
+Ice*	Ice::clone() const
 {
 	return (new Ice(*this));
 }

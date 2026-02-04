@@ -20,11 +20,13 @@ class Cure : public AMateria
 	public:
 		Cure();
 		Cure(const Cure& cpy);
-		Cure& operator=(const Cure& cpy);
 		~Cure();
 
-		AMateria* clone() const;
+		Cure* clone() const;
 		void use(ICharacter& target);
+
+	private:
+		Cure& operator=(const Cure& cpy);
 };
 
 #endif

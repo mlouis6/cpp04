@@ -15,22 +15,19 @@
 #include "ICharacter.hpp"
 #include <iostream>
 
-Cure::Cure() : AMateria()
+Cure::Cure() : AMateria("cure")
 {
-	m_type = "cure";
+	
 }
 
-Cure::Cure(const Cure& cpy)
+Cure::Cure(const Cure& cpy) : AMateria(cpy)
 {
-	// static_cast<void>(cpy);
-	m_type = cpy.m_type;
+
 }
 
 Cure&	Cure::operator=(const Cure& cpy)
 {
-	// static_cast<void>(cpy);
-	if (this != &cpy)
-		m_type = cpy.m_type;
+	static_cast<void>(cpy);
 	return (*this);
 }
 
@@ -39,7 +36,7 @@ Cure::~Cure()
 
 }
 
-AMateria*	Cure::clone() const
+Cure*	Cure::clone() const
 {
     return (new Cure(*this));
 }

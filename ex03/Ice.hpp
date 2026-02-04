@@ -20,11 +20,13 @@ class Ice : public AMateria
 	public:
 		Ice();
 		Ice(const Ice& cpy);
-		Ice& operator=(const Ice& cpy);
 		~Ice();
 
-		AMateria* clone() const;
+		Ice* clone() const;
 		void use(ICharacter& target);
+
+	private:
+		Ice& operator=(const Ice& cpy);
 };
 
 #endif

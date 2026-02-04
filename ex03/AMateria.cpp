@@ -22,10 +22,9 @@ AMateria::AMateria(const std::string& type) : m_type(type)
 
 }
 
-AMateria::AMateria(const AMateria& cpy)
+AMateria::AMateria(const AMateria& cpy) : m_type(cpy.m_type)
 {
-	static_cast<void>(cpy);
-	// m_type = cpy.m_type;
+	
 }
 
 AMateria&	AMateria::operator=(const AMateria& cpy)

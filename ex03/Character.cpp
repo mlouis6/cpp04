@@ -13,11 +13,19 @@
 #include "Character.hpp"
 #include "AMateria.hpp"
 #include <string>
+#include <iostream>
 
 
 Character::Character() : m_name("Unnamed")
 {
-
+	for (int i = 0 ; i < 4 ; ++i)
+	{
+	    m_equipment[i] = 0;
+	}
+	for (int i = 0 ; i < 100 ; ++i)
+	{
+	    m_inventory[i] = 0;
+	}
 }
 
 Character::Character(const std::string& name) : m_name(name)
@@ -32,20 +40,48 @@ Character::Character(const std::string& name) : m_name(name)
 	}
 }
 
-Character::Character(const Character& cpy)
+Character::Character(const Character& cpy) : m_name(cpy.m_name)
 {
 	for (int i = 0 ; i < 4 ; ++i)
-		m_equipment[i] = cpy.m_equipment[i];
-	// this->m_equipment = new AMateria(*cpy.m_equipment);
+	{
+		if (cpy.m_equipment[i])
+			m_equipment[i] = cpy.m_equipment[i]->clone();
+		else
+			m_equipment[i] = 0;
+	}
+	for (int i = 0 ; i < 100 ; ++i)
+	{
+		if (cpy.m_inventory[i])
+			m_inventory[i] = cpy.m_inventory[i]->clone();
+		else
+			m_inventory[i] = 0;
+	}
 }
 
 Character&	Character::operator=(const Character& cpy)
 {
 	if (this != &cpy)
 	{
+		m_name = cpy.m_name;
 		for (int i = 0 ; i < 4 ; ++i)
-			m_equipment[i] = cpy.m_equipment[i];
-	    // this->m_equipment = new AMateria(*cpy.m_equipment);
+		{
+			if (m_equipment[i])
+				delete m_equipment[i];
+			if (cpy.m_equipment[i])
+				m_equipment[i] = cpy.m_equipment[i]->clone();
+			else
+				m_equipment[i] = 0;
+		}
+		for (int i = 0 ; i < 100 ; ++i)
+		{
+			if (cpy.m_inventory[i])
+			{
+				delete m_inventory[i];
+				m_inventory[i] = cpy.m_inventory[i]->clone();
+			}
+			else
+				m_inventory[i] = 0;
+		}
 	}
 	return (*this);
 }
@@ -53,9 +89,15 @@ Character&	Character::operator=(const Character& cpy)
 Character::~Character()
 {
 	for (int i = 0 ; i < 4 ; ++i)
-		delete m_equipment[i];
+	{
+		if (m_equipment[i])
+			delete m_equipment[i];
+	}
 	for (int i = 0 ; i < 100 ; ++i)
-		delete m_inventory[i];
+	{
+		if (m_inventory[i])
+			delete m_inventory[i];
+	}
 }
 
 const std::string&	Character::getName() const
@@ -65,29 +107,33 @@ const std::string&	Character::getName() const
 
 void	Character::equip(AMateria* m)
 {
-	int i = 0;
-	for ( ; i < 4 ; ++i)
+	if (!m)
+		return ;
+	for (int i = 0 ; i < 4 ; ++i)
 	{
-		if (m_equipment[i] == 0)
-			break ;
+		if (!m_equipment[i])
+		{
+			m_equipment[i] = m;
+			return ;
+		}
 	}
-	if (i < 4)
-		m_equipment[i] = m;
+	delete m;
 }
 
 void	Character::wipeInventory()
 {
+	std::cout << "clean inventory to make more space" << std::endl;
 	for (int i = 0 ; i < 100 ; ++i)
 	{
-		delete m_inventory[i];
+		if (m_inventory[i])
+			delete m_inventory[i];
 		m_inventory[i] = 0;
 	}
-	
 }
 
 void	Character::unequip(int idx)
 {
-	if (m_equipment[idx] == 0)
+	if (idx < 0 || idx > 3 || m_equipment[idx] == 0)
 		return ;
 
 	int i = 0;
@@ -110,6 +156,12 @@ void	Character::unequip(int idx)
 
 void	Character::use(int idx, ICharacter& target)
 {
-	if (m_equipment[idx] != 0)
+	if (idx < 0 || idx > 3)
+		return ;
+	if (m_equipment[idx])
+	{
 		m_equipment[idx]->use(target);
+		return ;
+	}
+	std::cout << "nothing to use" << std::endl;
 }

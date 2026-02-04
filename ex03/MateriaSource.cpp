@@ -13,6 +13,7 @@
 #include "MateriaSource.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"
+#include <iostream>
 
 MateriaSource::MateriaSource()
 {
@@ -24,12 +25,29 @@ MateriaSource::MateriaSource()
 
 MateriaSource::MateriaSource(const MateriaSource& cpy)
 {
-	static_cast<void>(cpy);
+	for (int i = 0 ; i < 4 ; ++i)
+	{
+		if (cpy.m_materias[i])
+			m_materias[i] = cpy.m_materias[i]->clone();
+		else
+			m_materias[i] = 0;
+	}
 }
 
 MateriaSource&	MateriaSource::operator=(const MateriaSource& cpy)
 {
-	static_cast<void>(cpy);
+	if (this != &cpy)
+	{
+		for (int i = 0 ; i < 4 ; ++i)
+		{
+			if (m_materias[i])
+				delete m_materias[i];
+			if (cpy.m_materias[i])
+				m_materias[i] = cpy.m_materias[i]->clone();
+			else
+				m_materias[i] = 0;
+		}
+	}
 	return (*this);
 }
 
@@ -37,30 +55,36 @@ MateriaSource::~MateriaSource()
 {
 	for (int i = 0 ; i < 4 ; ++i)
 	{
-	    delete m_materias[i];
+		if (m_materias[i])
+	    	delete m_materias[i];
 	}
 }
 
 void    MateriaSource::learnMateria(AMateria* materia)
 {
-	int i = 0;
-	for ( ; i < 4 ; ++i)
+	if (!materia)
+		return ;
+	for (int i = 0 ; i < 4 ; ++i)
 	{
 		if (m_materias[i] == 0)
 		{
-			m_materias[i] = materia;
-			break ;
+			m_materias[i] = materia->clone();
+			delete materia;
+			return ;
 		}
 	}
+	delete materia;
 }
 
 AMateria*   MateriaSource::createMateria(const std::string& type)
 {
-	int i = 0;
-	for ( ; i < 4 ; ++i)
+	for (int i = 0 ; i < 4 ; ++i)
 	{
-		if (m_materias[i] != 0 && m_materias[i]->getType() == type)
+		if (m_materias[i] && m_materias[i]->getType() == type)
+		{
 			return (m_materias[i]->clone());
+		}
 	}
+	std::cout << "Unknown materia" << std::endl;
 	return (0);
 }
