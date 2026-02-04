@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:55:15 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/02 10:53:07 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/04 11:48:36 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@
 #include "Ice.hpp"
 #include "Cure.hpp"
 
+#include <iostream>
+
 int main()
 {
+
     IMateriaSource* src = new MateriaSource();
     src->learnMateria(new Ice());
     src->learnMateria(new Cure());

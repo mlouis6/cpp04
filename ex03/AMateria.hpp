@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:55:39 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/02 11:30:33 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/04 13:16:15 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class AMateria
 		std::string	m_type;
 
 	public:
-		AMateria() {};
+		AMateria();
 		AMateria(const std::string& type);
 		AMateria(const AMateria & cpy);
 		AMateria&	operator=(const AMateria& cpy);

@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 10:54:10 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/02 10:54:12 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/04 14:06:42 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@ Cure::Cure() : AMateria()
 
 Cure::Cure(const Cure& cpy)
 {
-	static_cast<void>(cpy);
+	// static_cast<void>(cpy);
+	m_type = cpy.m_type;
 }
 
 Cure&	Cure::operator=(const Cure& cpy)
 {
-	static_cast<void>(cpy);
+	// static_cast<void>(cpy);
+	if (this != &cpy)
+		m_type = cpy.m_type;
 	return (*this);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 10:11:11 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/02 11:36:58 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/04 13:58:47 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ void    MateriaSource::learnMateria(AMateria* materia)
 	for ( ; i < 4 ; ++i)
 	{
 		if (m_materias[i] == 0)
+		{
+			m_materias[i] = materia;
 			break ;
+		}
 	}
-	if (i < 4)
-		m_materias[i] = materia;
 }
 
 AMateria*   MateriaSource::createMateria(const std::string& type)
@@ -58,10 +59,8 @@ AMateria*   MateriaSource::createMateria(const std::string& type)
 	int i = 0;
 	for ( ; i < 4 ; ++i)
 	{
-		if (m_materias[i]->getType() == type)
-			break ;
+		if (m_materias[i] != 0 && m_materias[i]->getType() == type)
+			return (m_materias[i]->clone());
 	}
-	if (i < 4)
-		return (m_materias[i]->clone());
 	return (0);
 }

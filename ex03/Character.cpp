@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 10:54:16 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/02 14:24:13 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/04 14:01:50 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 #include "AMateria.hpp"
 #include <string>
 
-#include <iostream>
 
-Character::Character(std::string name) : m_name(name)
+Character::Character() : m_name("Unnamed")
+{
+
+}
+
+Character::Character(const std::string& name) : m_name(name)
 {
 	for (int i = 0 ; i < 4 ; ++i)
 	{
@@ -37,11 +41,12 @@ Character::Character(const Character& cpy)
 
 Character&	Character::operator=(const Character& cpy)
 {
-	static_cast<void>(cpy);
-	// if (this != &cpy)
-	// {
-	//     this->m_equipment = new AMateria(*cpy.m_equipment);
-	// }
+	if (this != &cpy)
+	{
+		for (int i = 0 ; i < 4 ; ++i)
+			m_equipment[i] = cpy.m_equipment[i];
+	    // this->m_equipment = new AMateria(*cpy.m_equipment);
+	}
 	return (*this);
 }
 
