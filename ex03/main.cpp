@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:55:15 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/04 11:48:36 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/05 11:53:05 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,24 +58,26 @@ int main()
 
     std::cout << "bobby" << std::endl;
     Character bobby;
+    bob->equip(src->createMateria("cure"));
     bobby = *bob;
     bob->equip(src->createMateria("ice"));
-    std::cout << "bob ice (print)" << std::endl;
-    bob->use(0, *me);
-    std::cout << "bobby ice (nothing)" << std::endl;
-    bobby.use(0, *me);
-    bobby.equip(src->createMateria("cure"));
-    std::cout << "bobby (print cure, then nothing)" << std::endl;
-    bobby.use(0, *me);
-    bobby.use(1, *me);
-    std::cout << "bob (print ice, then nothing)" << std::endl;
+    std::cout << "bob (cure, ice)" << std::endl;
     bob->use(0, *me);
     bob->use(1, *me);
+    std::cout << "bobby (cure, nothing)" << std::endl;
+    bobby.use(0, *me);
+    bobby.use(1, *me);
+    bobby.equip(src->createMateria("cure"));
+    std::cout << "bobby (cure, cure, nothing)" << std::endl;
+    bobby.use(0, *me);
+    bobby.use(1, *me);
+    bobby.use(2, *me);
 
     bob->unequip(10);
     bob->unequip(0);
     bob->unequip(1);
     bob->unequip(2);
+    bob->unequip(-2);
     
     std::cout << "bob (nothing)" << std::endl;
     bob->use(1, *me);
@@ -105,15 +107,17 @@ int main()
     }
     ICharacter *who = new Character();
     who->equip(src->createMateria("cure"));
-    std::cout << "(cure, cure)" << std::endl;
+    std::cout << "(cure, cure, nothing)" << std::endl;
     bob->use(0, *who);
     who->use(0, *who);
-
+    who->use(1, *who);
+    who->equip(Character::getFromFloor(3));
 
     delete who;
     delete bob;
     delete me;
     delete src;
+    Character::wipeFloor();
 
     return (0);
 }

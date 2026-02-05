@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 10:54:13 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/04 14:00:38 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/05 11:53:10 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,16 @@ class Character : public ICharacter
 		~Character();
 
 		const std::string&	getName() const;
-		void	equip(AMateria* m);
-		void	unequip(int idx);
-		void	use(int idx, ICharacter& target);
+		void				equip(AMateria* m);
+		void				unequip(int idx);
+		void				use(int idx, ICharacter& target);
+		static AMateria*	getFromFloor(int idx);
+		static void			wipeFloor();
 	private:
-		std::string	m_name;
-		AMateria*  	m_equipment[4];
-		AMateria*	m_inventory[100];
-		void		wipeInventory();
+		std::string			m_name;
+		AMateria*  			m_equipment[4];
+		static AMateria*	g_floor[100];
+		void				throwFloor(AMateria* m);
 };
 
 #endif
