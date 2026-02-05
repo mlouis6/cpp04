@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:55:15 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/05 11:53:05 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/05 12:42:21 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int main()
     std::cout << "bob (cure, cure, ice, cure)" << std::endl;
     for (int i = 0 ; i < 4 ; ++i)
         bob->use(i, *me);
-    std::cout << "bob (cure)" << std::endl;
+    std::cout << "bobby (cure, cure, nothing, nothing)" << std::endl;
     for (int i = 0 ; i < 4 ; ++i)
         bobby.use(i, *me);
 
@@ -107,11 +107,14 @@ int main()
     }
     ICharacter *who = new Character();
     who->equip(src->createMateria("cure"));
-    std::cout << "(cure, cure, nothing)" << std::endl;
+    std::cout << "(cure, cure, nothing, nothing, cure)" << std::endl;
     bob->use(0, *who);
     who->use(0, *who);
     who->use(1, *who);
+    who->equip(0);
+    who->use(1, *who);
     who->equip(Character::getFromFloor(3));
+    who->use(1, *who);
 
     delete who;
     delete bob;

@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 10:54:16 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/05 12:36:45 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/05 12:42:51 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	Character::equip(AMateria* m)
 
 void	Character::wipeFloor()
 {
-	std::cout << "clean inventory to make more space" << std::endl;
+	std::cout << "clear floor" << std::endl;
 	for (int i = 0 ; i < 100 ; ++i)
 	{
 		if (g_floor[i])
