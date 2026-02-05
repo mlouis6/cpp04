@@ -6,7 +6,7 @@
 /*   By: mlouis <mlouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 10:54:16 by mlouis            #+#    #+#             */
-/*   Updated: 2026/02/05 11:54:08 by mlouis           ###   ########.fr       */
+/*   Updated: 2026/02/05 12:36:45 by mlouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,7 @@ AMateria*	Character::getFromFloor(int idx)
 {
 	if (idx < 0 || idx > 99 || g_floor[idx] == 0)
 		return (0);
-	AMateria* tmp = g_floor[idx]->clone();
-	delete g_floor[idx];
+	AMateria* tmp = g_floor[idx];
 	g_floor[idx] = 0;
 	return (tmp);
 }
